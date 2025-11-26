@@ -22,7 +22,7 @@ jobs:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: /public_html/  # Thư mục gốc trên host (hãy kiểm tra kỹ)
+        server-dir: /www.minhtrieuOSS.somee.com/  # Thư mục gốc trên host (hãy kiểm tra kỹ)
         exclude: | # Các file không muốn đẩy lên
           **/.git*
           **/.git/**
