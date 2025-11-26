@@ -1,0 +1,39 @@
+name: Deploy to Shared Hosting
+
+on:
+  push:
+    branches:
+      - main  # Chạy khi có code mới đẩy lên nhánh main
+
+jobs:
+  web-deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    
+    # 1. Lấy code từ GitHub xuống máy ảo (Runner)
+    - name: Get latest code
+      uses: actions/checkout@v4
+    
+    # 2. (Tùy chọn) Nếu là Nodejs/React/Vue thì cần Build trước
+    # - name: Install Node.js
+    #   uses: actions/setup-node@v3
+    #   with:
+    #     node-version: '18'
+    # - run: npm install
+    # - run: npm run build
+    
+    # 3. Đẩy code lên Hosting qua FTP
+    - name: Sync files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        server-dir: /public_html/  # Thư mục gốc trên host (hãy kiểm tra kỹ)
+        exclude: | # Các file không muốn đẩy lên
+          **/.git*
+          **/.git/**
+          **/node_modules/**
+          README.md
+          .env.example
