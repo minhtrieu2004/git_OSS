@@ -15,14 +15,6 @@ jobs:
     - name: Get latest code
       uses: actions/checkout@v4
     
-    # 2. (Tùy chọn) Nếu là Nodejs/React/Vue thì cần Build trước
-    # - name: Install Node.js
-    #   uses: actions/setup-node@v3
-    #   with:
-    #     node-version: '18'
-    # - run: npm install
-    # - run: npm run build
-    
     # 3. Đẩy code lên Hosting qua FTP
     - name: Sync files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
